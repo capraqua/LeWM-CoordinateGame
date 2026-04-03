@@ -7,49 +7,90 @@ Based on: "LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architectu
 ## Example Output
 
 ```
-                     ·                     
-                     X                     
-                     ·  X   X     ○     X  
-                     ·    XX      !     X  
-                     ·            ○        
- X         X         ·            ○        
-                     ·            ○        
-                     ·            ○        
-    XX               ·    X       ○  X     
-        X            ·            ○        
-                     ·X           ○        
-                     ·     X      ○        
-                     X X          ○        
-         X           ·X           ○        
-     X               ·            ○  X     
-         XX      X   ·   X        ○ X      
-                     ·            ○        
-                     ·           ○○        
-                     ·       X X ○     X   
-  X    X     X       ·          ○○         
-             X       ·X         ○          
-································○··········
-     X               ·  X      ○○          
-                     ·      ○!○○ X         
-         X     X     ·  ○○○○○           X  
-            X        ·  ○                  
-                     ○○○!           X      
-                    X○                     
-                   X○○  X          X       
-       X           ○○○     X         X     
-             X   ★○○ ·                   X 
-                X    ·         X    X      
-   X        X        ·X        X           
-                     ·         X           
-       X       X     ·                     
-                     ·               X     
-                     ·                 X   
-                     ·         X           
-                     ·X  X              X  
-               X     ·           X         
-                   X ·                 X   
-      X  X          XX                   X 
-                     ·                                      
+                                         ·                                         
+                                        X·                             X   X       
+                    X            X       ·                                  X      
+                X  XX      X             · X   X         X                         
+        ○!○○○○○                       X  ·       X                                 
+         X    ○                          ·                                 X       
+             X○                          ·         X      X                        
+              ○     X    X       X       ·   X                    X          X     
+ X      X     ○○○X                       X                    X                    
+  X             ○○○○○                    X          X                X   X         
+                X   ○○○○   X             ·               X                X        
+          X    X      X○○○○XX      X  X  ·                                         
+                          ○○○     XX   X X                             X           
+      X          X          ○○           ·  X             X                        
+                             ○○○     X   ·                                         
+       X             X         ○○X  X    X                                         
+    X                           ○       X·                         X               
+                             X  ○        ·                    X    XX              
+                       X  X   X ○○○      ·   X X            X                      
+                                  ○○     ·          X            X                 
+    X          X        X          ○○○   ·         X                               
+                        X            ○○○○·  X                         X            
+                X                       ○○○!○                              X       
+ X                    X        X  X      X X○○○○      X                       X    
+                                         ·     ○○   X       X      X               
+                     X                   ·      ○                                  
+       X                  X           X  X      ○   X     X     X                  
+      X         X  X         X X         ·  X   ○                                  
+        X      X  X            X      X  ·  X   ○         X           X      X     
+       X     X    X X                    ·      ○                                  
+                          X         X    X      ○○                            X    
+                                         ·  X    ○○!○                              
+                                         ·          ○                        X     
+                 X                       ·          ○       X       X           X  
+                              X          ·         X○                            X 
+                      X               X  ·        X ○○  X                          
+        X                 X X            ·           ○○○○       X          X   X   
+                    X       X            ·              ○○○          X             
+                                         ·        X     X ○                        
+   X                                 X   ·                ○                        
+                                         ·                ○○○                      
+············X······X········································○○············X··X·····
+               X                         ·               X   ○○○               X   
+                        X      X         ·      X              ○                 X 
+             XX  X                       ·       X   X XX      ○○                  
+       X                                 ·                     X○                  
+    X                          X X    X  ·           X          !○○              X 
+              X                   X      ·          X             ○○               
+                            X            ·                X    X   ○○○X      X X   
+                             X      X    ·                           ○○ XX         
+          X                      X X     ·                     X      ○            
+                                         ·       X         XX         ○         X  
+                                   X     · X            X             ○X   X       
+                                X        ·     X                  X  ○○★     X     
+                                 X       ·                           ○             
+    X                                    · X                                       
+ X   X       X   X        X              ·                              X          
+          X                         X    ·                       X       X         
+   X                           X         ·        X      X             X           
+    X                                    X                            X     X      
+   X    X                      X       X ·     X                                   
+                             X     X     ·                                     X   
+       X                                 · X                                    X  
+      X             X          X         · X                   XX                  
+                                 X     X X X                            X          
+                      X         X        ·                      X                  
+                                         ·           XX                            
+                X                        ·       X                                 
+     X                                   ·                              X      X   
+             X    X                      ·                             X           
+                  X                      ·                     X         X     X   
+            X   X      X                 ·                                   X     
+                X              XX   X    ·        X          X    X                
+      XXX                                ·               X                         
+                            XX           ·   X         X                           
+ XX  X                                   ·      X                      X           
+           X                             ·                          X           X  
+                         X               ·     X                 X                 
+                       X    X        X   ·                       X      X      X   
+                   X                     ·                                         
+                         X         X     ·                     X               X   
+                  X                      ·            XX                     X     
+                                         ·                                         
+                                 
 ```
 
 Legend: `★` agent at goal, `○` path taken, `X` mine, `!` mine hit, `·` axis
@@ -66,9 +107,9 @@ Legend: `★` agent at goal, `○` path taken, `X` mine, `!` mine hit, `·` axis
 
 ## Coordinate Game
 
-- 41x41 grid (range ±20), 80 random mines
-- Agent sees mines within 1 step via 8 directional sensors
-- Actions: up, down, left, right (discrete)
+- Agent trains on a 41x41 grid (±20) with 80 mines
+- Agent plays on an 81x81 grid (±40) with 320 mines — testing out-of-distribution generalization
+- 8 directional mine sensors (1-step visibility)
 - Stepping on a mine = -1 penalty
 - Goal: reach a random target position
 
@@ -82,6 +123,6 @@ Legend: `★` agent at goal, `○` path taken, `X` mine, `!` mine hit, `·` axis
 ## Quick Start
 
 ```bash
-pip install torch
+pip install -r requirements.txt
 python coordinate_game.py
 ```
