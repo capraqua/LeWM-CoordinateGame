@@ -109,9 +109,9 @@ def continuous_to_discrete(action_vec):
     return ACTION_LIST[idx], ACTION_NAMES[idx]
 
 
-def collect_game_data(num_episodes=100, max_steps=20, num_mines=10):
+def collect_game_data(num_episodes=100, max_steps=20, num_mines=10, grid_range=20):
     """Play random episodes to collect transition data."""
-    game = CoordinateGame(grid_range=20, num_mines=num_mines)
+    game = CoordinateGame(grid_range=grid_range, num_mines=num_mines)
     states, actions, next_states, rewards = [], [], [], []
 
     for _ in range(num_episodes):
@@ -167,8 +167,11 @@ def render(state_10d, goal, mines, grid_range=20, path=None):
 
 
 def main():
-    num_mines = 80
-    game = CoordinateGame(grid_range=20, num_mines=num_mines)
+    train_grid = 20
+    play_grid = 40
+    num_mines_train = 80
+    num_mines_play = 320
+    game = CoordinateGame(grid_range=play_grid, num_mines=num_mines_play)
 
     # State is now 10D (x, y + 8 sensors)
     controller = MPCController(
@@ -179,10 +182,10 @@ def main():
         horizon=5,
     )
 
-    # Collect and train
-    print(f"Collecting random game data ({num_mines} mines per episode)...")
+    # Train on smaller grid to test adaptability
+    print(f"Collecting training data (grid ±{train_grid}, {num_mines_train} mines)...")
     states, actions, next_states, rewards = collect_game_data(
-        100, max_steps=15, num_mines=num_mines
+        500, max_steps=30, num_mines=num_mines_train, grid_range=train_grid
     )
     print(f"  {len(states)} transitions collected")
 
@@ -190,8 +193,9 @@ def main():
     controller.train_models(states, actions, next_states,
                             epochs=300, lr=1e-3)
 
-    # Play episodes
-    print("\n" + "=" * 50)
+    # Play on larger grid to test adaptability
+    print(f"\nPlaying on larger grid (±{play_grid}, {num_mines_play} mines)")
+    print("=" * 50)
     print("PLAYING WITH MPC AGENT")
     print("=" * 50)
 
@@ -205,11 +209,11 @@ def main():
         goal_10d = game.goal_state_10d
         print(f"\n--- Episode {ep+1} | Start: ({state[0]:.0f}, {state[1]:.0f}) "
               f"| Goal: ({goal[0]:.0f}, {goal[1]:.0f}) | Mines: {len(game.mines)} ---")
-        print(render(state, goal, game.mines))
+        print(render(state, goal, game.mines, grid_range=play_grid))
 
         ep_penalty = 0
         agent_path = [(int(state[0].item()), int(state[1].item()))]
-        for step in range(80):
+        for step in range(160):
             raw_action = controller.step(state, goal_10d)
             action_vec, action_name = continuous_to_discrete(raw_action)
             state, reward, done = game.step(action_vec)
@@ -226,12 +230,12 @@ def main():
 
             if done:
                 print(f"  ★ Reached goal in {step+1} steps! (penalties: {ep_penalty})")
-                print(render(state, goal, game.mines, path=agent_path))
+                print(render(state, goal, game.mines, grid_range=play_grid, path=agent_path))
                 wins += 1
                 break
         else:
             print(f"  ✗ Did not reach goal. Final: ({state[0]:.0f}, {state[1]:.0f})")
-            print(render(state, goal, game.mines, path=agent_path))
+            print(render(state, goal, game.mines, grid_range=play_grid, path=agent_path))
 
         total_penalties += ep_penalty
 
