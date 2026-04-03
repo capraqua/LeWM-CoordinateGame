@@ -4,6 +4,58 @@ A JEPA-based world model (LeWorldModel) controlling an agent in a 2D mine-filled
 
 Based on: "LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture" (Maes, Le Lidec et al., 2026)
 
+## Example Output
+
+```
+                     ·                     
+                     X                     
+                     ·  X   X     ○     X  
+                     ·    XX      !     X  
+                     ·            ○        
+ X         X         ·            ○        
+                     ·            ○        
+                     ·            ○        
+    XX               ·    X       ○  X     
+        X            ·            ○        
+                     ·X           ○        
+                     ·     X      ○        
+                     X X          ○        
+         X           ·X           ○        
+     X               ·            ○  X     
+         XX      X   ·   X        ○ X      
+                     ·            ○        
+                     ·           ○○        
+                     ·       X X ○     X   
+  X    X     X       ·          ○○         
+             X       ·X         ○          
+································○··········
+     X               ·  X      ○○          
+                     ·      ○!○○ X         
+         X     X     ·  ○○○○○           X  
+            X        ·  ○                  
+                     ○○○!           X      
+                    X○                     
+                   X○○  X          X       
+       X           ○○○     X         X     
+             X   ★○○ ·                   X 
+                X    ·         X    X      
+   X        X        ·X        X           
+                     ·         X           
+       X       X     ·                     
+                     ·               X     
+                     ·                 X   
+                     ·         X           
+                     ·X  X              X  
+               X     ·           X         
+                   X ·                 X   
+      X  X          XX                   X 
+                     ·                                      
+```
+
+Legend: `★` agent at goal, `○` path taken, `X` mine, `!` mine hit, `·` axis
+
+> **Note:** The agent does not currently avoid mines. The CEM planner only minimizes latent distance to the goal — it has no penalty for mine collisions. Mine avoidance is a planned improvement.
+
 ## How It Works
 
 1. An **Encoder** maps the 10D state (x, y + 8 mine sensors) to a 64D latent embedding, with a BatchNorm projection head
